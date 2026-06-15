@@ -1,73 +1,71 @@
-# 迈克尔逊干涉仪微弱力测量虚拟仿真 (Michelson Interferometer Weak Force Measurement Simulation)
+# Michelson Interferometer Weak Force Measurement Simulation
 
-这是一个基于 React, Vite, TypeScript, Tailwind CSS v4 和 Motion 开发的物理虚拟仿真项目。本项目旨在模拟和展示通过迈克尔逊干涉仪精密测量微弱外力的物理实验过程。
+[简体中文](./README.zh-CN.md) | English
 
-## 物理背景与基本原理
+![](https://raw.githubusercontent.com/Ferdinandhu000/my_blog_img/master/20260615125627.png)
 
-在经典力学和精密测量中，微弱力（如微牛顿 $\mu\text{N}$ 级别）通常难以用普通的机械衡器直接测定。本项目通过将微弱力转化为微小位移，再利用迈克尔逊干涉仪的干涉条纹移动来精确计量位移，从而间接测得微弱力的大小。
+This is a physical virtual simulation project developed based on React, Vite, TypeScript, Tailwind CSS v4, and Motion. The project aims to simulate and display the physical experimental process of precision measurement of weak external force using a Michelson interferometer.
 
-### 1. 胡克定律 (Hooke's Law)
-当微弱力 $F$ 作用于劲度系数为 $k$ 的弹性元件（如微型弹簧或悬臂梁）时，会产生微小的形变位移 $\Delta x$：
+## Physics Background and Core Principles
+
+In classical mechanics and precision measurement, weak forces (such as micro-Newton $\mu\text{N}$ scale) are usually difficult to measure directly with ordinary mechanical balances. This project converts the weak force into a micro displacement, and then uses the interference fringe shift of a Michelson interferometer to precisely measure the displacement, thereby indirectly obtaining the magnitude of the weak force.
+
+### 1. Hooke's Law
+When a weak force $F$ acts on an elastic element (such as a micro spring or cantilever beam) with a stiffness coefficient of $k$, it produces a micro deformation displacement $\Delta x$:
 $$F = k \cdot \Delta x$$
-在本项目中，设定弹簧劲度系数为：
+In this project, the spring stiffness coefficient is set as:
 $$k = 0.485 \, \text{N/m}$$
 
-### 2. 迈克尔逊干涉原理 (Michelson Interferometry)
-氦氖（He-Ne）激光器发射的激光（波长 $\lambda = 632.8 \, \text{nm}$）经分束镜（BS）分为两路：
-- **光束 A**：经固定反射镜 $M_1$ 反射后折回。
-- **光束 B**：经可动反射镜 $M_2$ 反射后折回。
+### 2. Michelson Interferometry Principle
+The laser emitted by a Helium-Neon (He-Ne) laser (wavelength $\lambda = 632.8 \, \text{nm}$) is split into two beams by a beam splitter (BS):
+- **Beam A**: Reflected by the fixed mirror $M_1$ and returns.
+- **Beam B**: Reflected by the movable mirror $M_2$ and returns.
 
-两路光束在分束镜处汇合，并在观察屏上产生干涉。当可动反射镜 $M_2$ 产生位移 $\Delta x$ 时，光束 B 的光程改变了 $2\Delta x$，导致干涉条纹发生移动。
+The two beams merge at the beam splitter and generate interference on the observation screen. When the movable mirror $M_2$ produces a displacement $\Delta x$, the optical path of beam B changes by $2\Delta x$, causing the interference fringes to move.
 
-干涉条纹的移动数目（吞吐条纹数）$N$ 与反射镜位移 $\Delta x$ 满足如下关系：
+The number of moving interference fringes (fringe shift cycle) $N$ and the mirror displacement $\Delta x$ satisfy the following relationship:
 $$N = \frac{2\Delta x}{\lambda}$$
-通过高精度实时计算 $N$，我们可以反推出极微小的位移 $\Delta x$，并利用虎克定律求得作用在 $M_2$ 上的微弱力 $F$。
+By high-precision real-time calculation of $N$, we can deduce the extremely small displacement $\Delta x$, and use Hooke's Law to calculate the weak force $F$ acting on $M_2$.
 
 ---
 
-## 项目主要功能与特点
+## Key Features
 
-- **动态光路示意图**：使用 SVG 动态绘制迈克尔逊干涉仪结构，包含激光源、分束镜（BS）、固定镜 $M_1$、可动镜 $M_2$、观察屏以及随作用力实时拉伸/压缩的微型弹簧。
-- **光子动画模拟**：通过两组不同颜色（蓝色和绿色）的光子在光路中往返运动，直观演示两束相干光的干涉合束过程。
-- **实时干涉条纹绘制**：利用 HTML5 Canvas 根据当前的位移量实时计算相位差，绘制出同心圆状的红色氦氖干涉条纹，并随着微弱力的施加和释放呈现动态的“吞条纹/吐条纹”效果。
-- **精密数据监测面板**：
-  - 位移量 $\Delta x$
-  - 光程差 $\text{OPD}$
-  - 条纹移动数目 $N$
-  - 测得的微弱力大小 $F$
-- **现代化交互界面**：采用极简、高质感的设计，支持一键“施加微弱力”与“释放压力”的流畅动画过渡。
-
----
-
-## 技术栈
-
-- **前端框架**：React 19, TypeScript
-- **构建工具**：Vite 6
-- **样式方案**：Tailwind CSS v4
-- **动画库**：Motion React, Lucide Icons
+- **Dynamic Schematic Diagram**: Real-time rendering of the Michelson interferometer structure using SVG, including the laser source, beam splitter (BS), fixed mirror $M_1$, movable mirror $M_2$, observation screen, and a micro spring that stretches/compresses in real-time with the applied force.
+- **Photon Animation Simulation**: Displays two sets of photons in different colors (blue and green) moving back and forth along the optical paths, visually demonstrating the interference merging process of the two coherent beams.
+- **Real-time Fringe Drawing**: Uses HTML5 Canvas to calculate the phase difference in real-time based on the current displacement, drawing concentric red He-Ne interference fringes, and presenting a dynamic "fringe shift" effect as the weak force is applied and released.
+- **Precision Metrics Dashboard**:
+  - Displacement $\Delta x$
+  - Optical Path Difference $\text{OPD}$
+  - Fringe shift count $N$
+  - Measured weak force magnitude $F$
+- **Modern User Interface**: Minimalist and premium look, supporting smooth animations for applying and releasing the weak force.
 
 ---
 
-## 本地开发与运行指南
+## Tech Stack
 
-### 1. 克隆/下载项目
-将本项目拉取到本地目录中。
+- **Frontend Framework**: React 19, TypeScript
+- **Build Tool**: Vite 6
+- **Styling**: Tailwind CSS v4 (Modern CSS-only imports)
+- **Animation**: Motion React (formerly Framer Motion), Lucide Icons (Icons)
 
-### 2. 安装依赖
-在项目根目录下，运行以下命令安装必要的 Node 包：
+---
+
+## Local Development and Running Guide
+
+### 1. Clone / Download the Project
+Pull the project files into your local directory.
+
+### 2. Install Dependencies
+Run the following command in the project root directory to install the required Node packages:
 ```bash
 npm install
 ```
 
-### 3. 启动开发服务器
-启动 Vite 本地开发服务器：
+### 3. Start the Development Server
+Start the Vite local development server:
 ```bash
 npm run dev
 ```
-启动后在浏览器中打开命令行提示的本地链接，即可体验仿真。
-
-### 4. 项目打包构建
-生成用于生产环境的静态包：
-```bash
-npm run build
-```
+Once started, open the local URL prompted in the command line in your browser to experience the simulation.
